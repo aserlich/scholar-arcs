@@ -1,13 +1,14 @@
 ## Integration checks against a verified snapshot. Skipped unless the reference
 ## data is present, so the suite still runs on a clean machine.
 ##
-## journal-tracker/data/citations.csv was hand-verified against both Google
-## Scholar and OpenAlex, which makes it the strongest correctness check available:
-## if this package's pipeline disagrees with it, this package is wrong.
+## The reference snapshot was hand-verified against both Google Scholar and
+## OpenAlex, which makes it the strongest correctness check available: if this
+## package's pipeline disagrees with it, this package is wrong.
 
-REF_CSV <- path.expand("~/Dropbox/admin_projects/journal-tracker/data/citations.csv")
+# Point SCHOLARARCS_REF_CSV at a csv of article_id,year,cites,source to run these.
+REF_CSV <- Sys.getenv("SCHOLARARCS_REF_CSV", unset = "")
 
-skip_no_ref <- function() testthat::skip_if_not(file.exists(REF_CSV), "no reference snapshot")
+skip_no_ref <- function() testthat::skip_if_not(nzchar(REF_CSV) && file.exists(REF_CSV), "no reference snapshot (set SCHOLARARCS_REF_CSV)")
 
 ref_series <- function() {
   raw <- utils::read.csv(REF_CSV, stringsAsFactors = FALSE)
