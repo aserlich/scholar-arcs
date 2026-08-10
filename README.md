@@ -10,13 +10,28 @@ Three views of a researcher's citation record:
 
 ## Run it
 
-```r
-# OpenAlex (works anywhere)
-scholararcs::run_app()
+No installation needed — point Shiny at the folder:
 
-# Google Scholar — LOCAL ONLY, see below
-scholararcs::run_app(source = "scholar")
+```r
+shiny::runApp("~/Dropbox/admin_projects/scholar-arcs")
 ```
+
+Or install it once and use the package interface:
+
+```sh
+R CMD INSTALL scholar-arcs      # from the parent directory
+```
+```r
+scholararcs::run_app(mailto = "you@example.edu")   # OpenAlex, works anywhere
+scholararcs::run_app(source = "scholar")           # Google Scholar, LOCAL ONLY
+```
+
+`mailto` puts you in OpenAlex's "polite pool", which is faster and more stable. Set it once with
+`options(scholararcs.mailto = "you@example.edu")` or the `SCHOLARARCS_MAILTO` environment variable.
+
+**Identifiers.** OpenAlex takes an ORCID, or a name search that shows candidate profiles to pick
+from. Google Scholar takes the `user=` value out of your profile URL — name lookup no longer works,
+because Google blocks it.
 
 ## Why two backends
 
