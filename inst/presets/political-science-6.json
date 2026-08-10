@@ -1,0 +1,58 @@
+{
+  "generated": "2026-08-10",
+  "name": "Political science, 6 groups (audience breadth)",
+  "note": "Groups by AUDIENCE BREADTH, not prestige. The one prestige-flavoured exception is top3. IJPOR sits in interdisciplinary because it publishes across comms/soc/psych; IPSR sits in general political science because its readership is generalist whatever its ranking. Those two calls are what fix the axis as breadth rather than tier.",
+  "groups": ["Top 3 (AJPS/APSR/JOP)", "General political science", "PS subfield", "Area studies", "Interdisciplinary", "Non-political science"],
+  "venues": {
+    "American Journal of Political Science": "Top 3 (AJPS/APSR/JOP)",
+    "American Political Science Review": "Top 3 (AJPS/APSR/JOP)",
+    "The Journal of Politics": "Top 3 (AJPS/APSR/JOP)",
+    "Journal of Politics": "Top 3 (AJPS/APSR/JOP)",
+
+    "Comparative Political Studies": "General political science",
+    "Political Science Research and Methods": "General political science",
+    "World Politics": "General political science",
+    "International Political Science Review": "General political science",
+    "British Journal of Political Science": "General political science",
+    "European Journal of Political Research": "General political science",
+    "Government and Opposition": "General political science",
+
+    "Journal of Experimental Political Science": "PS subfield",
+    "Journal of Conflict Resolution": "PS subfield",
+    "International Studies Quarterly": "PS subfield",
+    "Journal of Elections, Public Opinion and Parties": "PS subfield",
+    "The International Journal of Press/Politics": "PS subfield",
+    "Political Analysis": "PS subfield",
+    "Electoral Studies": "PS subfield",
+    "Journal of Peace Research": "PS subfield",
+    "Conflict Management and Peace Science": "PS subfield",
+    "Political Research Quarterly": "PS subfield",
+    "Political Communication": "PS subfield",
+    "Politics, Groups, and Identities": "PS subfield",
+    "Research & Politics": "PS subfield",
+
+    "Post-Soviet Affairs": "Area studies",
+    "The Journal of Modern African Studies": "Area studies",
+    "Journal of Modern African Studies": "Area studies",
+
+    "Social Science Computer Review": "Interdisciplinary",
+    "Political Psychology": "Interdisciplinary",
+    "International Journal of Public Opinion Research": "Interdisciplinary",
+    "Comparative Migration Studies": "Interdisciplinary",
+    "World Development": "Interdisciplinary",
+    "Development Engineering": "Interdisciplinary",
+    "Proceedings of the National Academy of Sciences": "Interdisciplinary",
+    "Nature Human Behaviour": "Interdisciplinary",
+    "Nature Communications": "Interdisciplinary",
+
+    "Journal of Public Administration Research and Theory": "Non-political science",
+    "Journal of Public Administration Research & Theory": "Non-political science",
+    "Economic Development and Cultural Change": "Non-political science",
+    "Sociological Methods & Research": "Non-political science",
+    "Sociological Methods and Research": "Non-political science",
+    "International Journal of Social Research Methodology": "Non-political science",
+    "Policing and Society": "Non-political science",
+    "Sociological Science": "Non-political science",
+    "Organization Science": "Non-political science"
+  }
+}

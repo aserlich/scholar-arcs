@@ -1,0 +1,13 @@
+.Rproj.user/
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+.DS_Store
+
+# On-disk API caches (regenerable; may hold a lot of data)
+inst/app/cache/
+.scholararcs-cache/
+
+# rsconnect deployment metadata
+rsconnect/

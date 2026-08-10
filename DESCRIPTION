@@ -1,0 +1,40 @@
+Package: scholararcs
+Title: Citation Arcs for Any Researcher
+Version: 0.1.0
+Authors@R:
+    person("Aaron", "Erlich", email = "aaron.erlich@mcgill.ca", role = c("aut", "cre"))
+Description: Draws three views of a researcher's citation record: cumulative
+    citations in calendar time, cumulative citations aligned on each paper's
+    publication year, and the per-year arc that shows when papers actually
+    peaked. Papers are coloured by the kind of venue that published them,
+    tiered automatically within the author's own field and overridable by hand.
+    Reads from OpenAlex by default, which works anywhere; a Google Scholar
+    backend is available when the app is run locally.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 4.1.0)
+Imports:
+    shiny (>= 1.7.0),
+    bslib,
+    dplyr,
+    tidyr,
+    purrr,
+    tibble,
+    ggplot2 (>= 3.4.0),
+    ggrepel,
+    scales,
+    jsonlite,
+    httr2,
+    rlang,
+    DT,
+    cachem,
+    memoise
+Suggests:
+    scholar,
+    testthat (>= 3.0.0),
+    readr
+Config/testthat/edition: 3
+RoxygenNote: 7.3.2
+URL: https://github.com/aerlich/scholar-arcs
