@@ -10,28 +10,68 @@ Three views of a researcher's citation record:
 
 ## Run it
 
-No installation needed — point Shiny at the folder:
+You need R (4.1 or newer). Nothing else — no server, no account, no API key.
 
-```r
-shiny::runApp("~/Dropbox/admin_projects/scholar-arcs")
-```
-
-Or install it once and use the package interface:
+**Quickest — no installation.** Clone and point Shiny at the folder:
 
 ```sh
-R CMD INSTALL scholar-arcs      # from the parent directory
+git clone https://github.com/aserlich/scholar-arcs.git
 ```
 ```r
-scholararcs::run_app(mailto = "you@example.edu")   # OpenAlex, works anywhere
-scholararcs::run_app(source = "scholar")           # Google Scholar, LOCAL ONLY
+install.packages(c("shiny", "bslib", "DT", "dplyr", "tidyr", "purrr", "tibble",
+                   "rlang", "ggplot2", "ggrepel", "scales", "jsonlite", "httr2"))
+shiny::runApp("scholar-arcs")
 ```
 
-`mailto` puts you in OpenAlex's "polite pool", which is faster and more stable. Set it once with
-`options(scholararcs.mailto = "you@example.edu")` or the `SCHOLARARCS_MAILTO` environment variable.
+**Or install it as a package**, which also gives you the functions on their own:
 
-**Identifiers.** OpenAlex takes an ORCID, or a name search that shows candidate profiles to pick
-from. Google Scholar takes the `user=` value out of your profile URL — name lookup no longer works,
-because Google blocks it.
+```r
+# install.packages("remotes")
+remotes::install_github("aserlich/scholar-arcs")
+
+scholararcs::run_app(mailto = "you@example.edu")
+```
+
+`mailto` puts you in OpenAlex's "polite pool" — faster and more stable, and it is how OpenAlex asks
+to be identified. Set it once with `options(scholararcs.mailto = "you@example.edu")` or the
+`SCHOLARARCS_MAILTO` environment variable.
+
+Then enter your **ORCID**, or search your name and pick your profile from the candidates.
+
+## Use Google Scholar instead
+
+Google Scholar reports substantially higher citation counts than OpenAlex — roughly 1.5× on the
+record this was built against — because it indexes preprints, book chapters, theses and non-English
+work that OpenAlex misses. Those are the numbers most people recognise.
+
+**It only works locally.** Scholar has no API; the `scholar` package scrapes the HTML, and Google
+blocks datacenter IP addresses, so a hosted copy of this app is useless for it. On your own machine
+from your own connection it is fine.
+
+```r
+install.packages("scholar")          # not installed by default
+
+scholararcs::run_app(source = "scholar")
+```
+
+Then paste your **profile id** — the `user=` value from your Scholar URL:
+
+```
+https://scholar.google.com/citations?user=h8n98PQAAAAJ
+                                          ^^^^^^^^^^^^
+```
+
+Name lookup is not offered because Google no longer allows it — `get_scholar_id()` returns nothing
+for every name, even from a residential connection.
+
+**Expect it to be slow.** Scholar is fetched one paper at a time behind an 8-second throttle, so a
+50-paper profile takes about seven minutes. Progress is cached to disk as it goes, so if Google
+starts blocking part-way through you can re-run and it picks up where it stopped rather than
+starting over.
+
+**One thing Scholar cannot do here:** it returns journal *names* but no venue identifiers, so
+automatic tiering is unavailable on that backend. Group your venues by hand, or load a saved
+mapping — `inst/presets/political-science-6.json` is an example.
 
 ## Why two backends
 
