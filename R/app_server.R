@@ -23,7 +23,11 @@ arc_server <- function(input, output, session) {
   shiny::observeEvent(input$go_orcid, {
     shiny::req(nzchar(input$orcid))
     a <- oa_resolve_orcid(input$orcid)
-    if (is.null(a) || !nrow(a)) return(say("No OpenAlex author for that ORCID.", "error"))
+    if (is.character(a)) return(say(switch(a,
+      malformed   = "That does not look like an ORCID. They run 0000-0000-0000-0000.",
+      notfound    = "That ORCID is valid, but OpenAlex has no author record attached to it. Try a name search instead.",
+      unreachable = "Could not reach OpenAlex just now &mdash; your ORCID is probably fine. Try again in a moment.",
+      "Could not resolve that ORCID."), "error"))
     st$author <- a
     load_openalex(a$id[1])
   })

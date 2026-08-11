@@ -44,16 +44,24 @@ OA_COUNTS_FLOOR <- 2012L
 # ---- author resolution -------------------------------------------------------
 
 #' Resolve an ORCID to an OpenAlex author record
+#'
+#' Uses the filter form rather than `authors/https://orcid.org/{id}`. That variant
+#' embeds a whole URL inside the request path, and anything that normalises the
+#' "//" mangles it — the filter form has no such trap.
+#'
+#' @return a one-row author tibble, or a length-1 character giving the reason:
+#'   "malformed", "notfound", or "unreachable". Callers must distinguish them:
+#'   reporting a network failure as "no such ORCID" sends people off checking an
+#'   identifier that was never the problem.
 #' @export
 oa_resolve_orcid <- function(orcid) {
-  orcid <- trimws(orcid)
-  # Accept a bare id or a full orcid.org URL.
-  orcid <- sub("^https?://orcid\\.org/", "", orcid)
+  orcid <- sub("^https?://orcid\\.org/", "", trimws(orcid))
   if (!grepl("^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{3}[0-9X]$", orcid))
-    return(NULL)
-  a <- .oa_get(paste0("authors/https://orcid.org/", orcid))
-  if (is.null(a$id)) return(NULL)
-  .oa_author_row(a)
+    return("malformed")
+  r <- .oa_get("authors", list(filter = paste0("orcid:", orcid), per_page = 1))
+  if (is.null(r$results)) return("unreachable")
+  if (!length(r$results)) return("notfound")
+  .oa_author_row(r$results[[1]])
 }
 
 #' Search OpenAlex authors by name
