@@ -12,7 +12,7 @@ arc_ui <- function(request) {
       shiny::radioButtons("backend", "Data source",
         choices = c("OpenAlex (works anywhere)" = "openalex",
                     "Google Scholar (local only)" = "scholar"),
-        selected = "openalex"),
+        selected = getOption("scholararcs.default_backend", "openalex")),
       shiny::uiOutput("backend_note"),
 
       shiny::conditionalPanel("input.backend == 'openalex'",
